@@ -1201,7 +1201,9 @@ void GothicAPI::OnVobMoved( zCVob* vob ) {
     auto it = VobMap.find( vob );
     if ( it != VobMap.end() ) {
         VobInfo* vi = it->second;
-        if ( checkMatrix( vob->GetWorldMatrixXM(), XMLoadFloat4x4( &vi->WorldMatrix ) ) ) {
+        auto matrix1 = vob->GetWorldMatrixXM();
+        auto matrix2 = XMLoadFloat4x4( &vi->WorldMatrix );
+        if ( checkMatrix( matrix1, matrix2 ) ) {
             // No actual change
             return;
         }
@@ -1217,7 +1219,9 @@ void GothicAPI::OnVobMoved( zCVob* vob ) {
         auto sit = SkeletalVobMap.find( vob );
         if ( sit != SkeletalVobMap.end() ) {
             SkeletalVobInfo* vi = sit->second;
-            if ( vi->ParentBSPNodes.empty() || checkMatrix( vob->GetWorldMatrixXM(), XMLoadFloat4x4( &vi->WorldMatrix ) ) ) {
+            auto matrix1 = vob->GetWorldMatrixXM();
+            auto matrix2 = XMLoadFloat4x4( &vi->WorldMatrix);
+            if ( vi->ParentBSPNodes.empty() || checkMatrix( matrix1, matrix2 ) ) {
                 // No actual change
                 return;
             }
@@ -1402,7 +1406,7 @@ void GothicAPI::OnRemovedVob( zCVob* vob, zCWorld* world ) {
 
     // Erase the vob from visual-vob map
     std::list<BaseVobInfo*>& list = VobsByVisual[vob->GetVisual()];
-    for ( auto& vit = list.begin(); vit != list.end(); ++vit ) {
+    for ( auto vit = list.begin(); vit != list.end(); ++vit ) {
         if ( (*vit)->Vob == vob ) {
             list.erase( vit );
             break; // Can (should!) only be in here once
@@ -1523,7 +1527,7 @@ void GothicAPI::OnRemovedVob( zCVob* vob, zCWorld* world ) {
         vi->VobSection->Vobs.remove( vi );
     }
     // Erase it from the skeletal vob-list
-    for ( auto& vit = SkeletalMeshVobs.begin(); vit != SkeletalMeshVobs.end(); ++vit ) {
+    for ( auto vit = SkeletalMeshVobs.begin(); vit != SkeletalMeshVobs.end(); ++vit ) {
         if ( (*vit)->Vob == vob ) {
             //SkeletalVobInfo* vi = *vit;
             SkeletalMeshVobs.erase( vit );
@@ -1531,7 +1535,7 @@ void GothicAPI::OnRemovedVob( zCVob* vob, zCWorld* world ) {
         }
     }
 
-    for ( auto& vit = AnimatedSkeletalVobs.begin(); vit != AnimatedSkeletalVobs.end(); ++vit ) {
+    for ( auto vit = AnimatedSkeletalVobs.begin(); vit != AnimatedSkeletalVobs.end(); ++vit ) {
         if ( (*vit)->Vob == vob ) {
             //SkeletalVobInfo* vi = *it;
             AnimatedSkeletalVobs.erase( vit );
@@ -1540,7 +1544,7 @@ void GothicAPI::OnRemovedVob( zCVob* vob, zCWorld* world ) {
     }
 
     // Erase it from dynamically loaded vobs
-    for ( auto& vit = DynamicallyAddedVobs.begin(); vit != DynamicallyAddedVobs.end(); ++vit ) {
+    for ( auto vit = DynamicallyAddedVobs.begin(); vit != DynamicallyAddedVobs.end(); ++vit ) {
         if ( (*vit)->Vob == vob ) {
             DynamicallyAddedVobs.erase( vit );
             break;
@@ -2648,8 +2652,8 @@ FXMVECTOR GothicAPI::GetFogColor() {
     if ( !sc || !sc->GetOverrideFlag() )
 
         return FogColorMod;
-
-    XMVECTOR color = XMLoadFloat3( &sc->GetOverrideColor() );
+    auto oColor = sc->GetOverrideColor();
+    XMVECTOR color = XMLoadFloat3( &oColor );
 
     // Clamp to length of 0.5f. Gothic does it at an intensity of 120 / 255.
     float len;
@@ -2681,7 +2685,8 @@ float GothicAPI::GetFogOverride() {
     if ( !sc )
         return 0.0f;
     float veclenght;
-    XMStoreFloat( &veclenght, XMVector3Length( XMLoadFloat3( &sc->GetOverrideColor() ) ) );
+    auto color = sc->GetOverrideColor();
+    XMStoreFloat( &veclenght, XMVector3Length( XMLoadFloat3( &color ) ) );
     return sc->GetOverrideFlag() ? std::min( veclenght, 0.5f ) * 2.0f : 0.0f;
 }
 

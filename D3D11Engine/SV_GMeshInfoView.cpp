@@ -102,8 +102,8 @@ void SV_GMeshInfoView::UpdateView() {
 	g->SetDefaultStates();
 	Engine::GAPI->GetRendererState().RasterizerState.CullMode = GothicRasterizerStateInfo::CM_CULL_NONE;
 	Engine::GAPI->GetRendererState().RasterizerState.SetDirty();
-
-	XMMATRIX oldProj = XMLoadFloat4x4(&Engine::GAPI->GetProjTransform());
+    auto ProjTransform = Engine::GAPI->GetProjTransform();
+	XMMATRIX oldProj = XMLoadFloat4x4(&ProjTransform);
 
 	// Set transforms
 	Engine::GAPI->SetWorldTransformXM(ObjectWorldMatrix);
@@ -126,7 +126,8 @@ void SV_GMeshInfoView::UpdateView() {
 	g->GetContext()->RSSetViewports( 1, &vp );
 
 	// Clear
-	g->GetContext()->ClearRenderTargetView( RT->GetRenderTargetView().Get(), (float*)&float4( 0, 0, 0, 0 ) );
+    auto float41 = float4( 0, 0, 0, 0 );
+	g->GetContext()->ClearRenderTargetView( RT->GetRenderTargetView().Get(), reinterpret_cast<float*>(&float41) );
 	g->GetContext()->ClearDepthStencilView( DS->GetDepthStencilView().Get(), D3D11_CLEAR_DEPTH, 1.0f, 0 );
 
 	// Bind RTV

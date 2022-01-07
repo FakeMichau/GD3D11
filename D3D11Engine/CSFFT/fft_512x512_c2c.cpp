@@ -197,9 +197,10 @@ void fft512x512_create_plan(CSFFT512x512_Plan* plan, Microsoft::WRL::ComPtr<ID3D
 	// Compute shaders
 	Microsoft::WRL::ComPtr<ID3DBlob> pBlobCS;
 	Microsoft::WRL::ComPtr<ID3DBlob> pBlobCS2;
-
-    CompileShaderFromFile(L"CSFFT\\fft_512x512_c2c.hlsl", "Radix008A_CS", "cs_5_0", pBlobCS.GetAddressOf());
-    CompileShaderFromFile(L"CSFFT\\fft_512x512_c2c.hlsl", "Radix008A_CS2", "cs_5_0", pBlobCS2.GetAddressOf());
+    std::wstring csfft = L"CSFFT\\fft_512x512_c2c.hlsl";
+    auto wcharThing = const_cast<WCHAR*>(csfft.c_str());
+    CompileShaderFromFile( wcharThing, "Radix008A_CS", "cs_5_0", pBlobCS.GetAddressOf());
+    CompileShaderFromFile( wcharThing, "Radix008A_CS2", "cs_5_0", pBlobCS2.GetAddressOf());
 	assert(pBlobCS.Get());
 	assert(pBlobCS2.Get());
 

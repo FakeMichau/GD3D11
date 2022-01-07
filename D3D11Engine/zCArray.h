@@ -81,7 +81,7 @@ private:
 
         if ( this->NumInArray > 0 ) {
             for ( int i = 0; i < this->NumInArray; i++ )
-                pArray[i] = array[i];
+                pArray[i] = Array[i];
         };
 
         delete[] this->Array;

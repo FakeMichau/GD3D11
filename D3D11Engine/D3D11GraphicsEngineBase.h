@@ -90,7 +90,7 @@ public:
     virtual XRESULT DrawVertexBufferFF( D3D11VertexBuffer* vb, unsigned int numVertices, unsigned int startVertex, unsigned int stride = sizeof( ExVertexStruct ) );
 
     /** Binds viewport information to the given constantbuffer slot */
-    XRESULT D3D11GraphicsEngineBase::BindViewportInformation( const std::string& shader, int slot );
+    XRESULT BindViewportInformation( const std::string& shader, int slot );
 
     /** Returns the Device/Context */
     const Microsoft::WRL::ComPtr<ID3D11Device1>& GetDevice() { return Device; }

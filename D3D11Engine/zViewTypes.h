@@ -106,39 +106,39 @@ public:
         return DefaultColor;
     }
 
-    int _zCView::rnd2( float x ) const {
+    int rnd2( float x ) const {
         if ( x > 0 ) return (int)(x + 0.5);
         else return (int)(x - 0.5);
     }
-    int _zCView::nax( int x ) const {
+    int nax( int x ) const {
         return rnd2( (float)(x * psizex) / 8192 );
     }
 
-    int _zCView::nay( int y ) const {
+    int nay( int y ) const {
         return rnd2( (float)(y * psizey) / 8192 );
     }
 
-    int _zCView::anx( int x ) const {
+    int anx( int x ) const {
         return rnd2( (float)(x * 8192) / psizex );
     }
-    int _zCView::any( int x ) const {
+    int any( int x ) const {
         return rnd2( (float)(x * 8192) / psizey );
     }
 
-    void _zCView::CheckAutoScroll() {
+    void CheckAutoScroll() {
         // TODO: G1 addresses!
         reinterpret_cast<void( __fastcall* )( _zCView* )>( 0x007A5F60 )( this );
     }
-    void _zCView::CheckTimedText() {
+    void CheckTimedText() {
         // TODO: G1 addresses!
         reinterpret_cast<void( __fastcall* )( _zCView* )>( 0x007A7C50 )( this );
     }
 
-    void _zCView::PrintChars( int x, int y, const zSTRING& str ) {
+    void PrintChars( int x, int y, const zSTRING& str ) {
         reinterpret_cast<void( __fastcall* )( _zCView*, int, int, int, const zSTRING& )>
             ( GothicMemoryLocations::zCView::PrintChars )( this, 0, x, y, str );
     }
-    zCViewText* _zCView::CreateText( int x, int y, const zSTRING& str ) {
+    zCViewText* CreateText( int x, int y, const zSTRING& str ) {
         return reinterpret_cast<zCViewText*( __fastcall* )( _zCView*, int, int, int, const zSTRING& )>
             ( GothicMemoryLocations::zCView::CreateText )( this, 0, x, y, str );
     }
@@ -204,12 +204,12 @@ public:
     int registeredCPP;
     int firstTimeInserted;
 
-    bool zCMenuItem::GetIsDisabled() {
+    bool GetIsDisabled() {
         if ( !m_bVisible ) return true;
         return (m_parItemFlags & 32);
     }
 private:
-    int zCMenuItem::GetIsDisabledInternal() {
+    int GetIsDisabledInternal() {
         // TODO: G1 Addresses
         return reinterpret_cast<int( __fastcall* )( zCMenuItem* )>( 0x004E1DE0 )( this );
     }

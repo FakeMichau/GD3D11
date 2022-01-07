@@ -369,9 +369,9 @@ XRESULT D3D11GraphicsEngineBase::UpdateRenderStates() {
         }
 
         FFBlendState = state->State.Get();
-
+        auto float4zeros = float4( 0, 0, 0, 0 );
         Engine::GAPI->GetRendererState().BlendState.StateDirty = false;
-        GetContext()->OMSetBlendState( FFBlendState.Get(), (float*)&float4( 0, 0, 0, 0 ), 0xFFFFFFFF );
+        GetContext()->OMSetBlendState( FFBlendState.Get(), reinterpret_cast<float*>(&float4zeros), 0xFFFFFFFF );
     }
 
     if ( Engine::GAPI->GetRendererState().RasterizerState.StateDirty ) {

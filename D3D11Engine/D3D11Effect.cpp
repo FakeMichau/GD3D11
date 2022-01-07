@@ -136,7 +136,7 @@ XRESULT D3D11Effect::DrawRain() {
             HRESULT hr = S_OK;
             // Load textures...
             LogInfo() << "Loading rain-drop textures";
-            LE( LoadTextureArray( e->GetDevice().Get(), e->GetContext().Get(), "system\\GD3D11\\Textures\\Raindrops\\cv0_vPositive_", 370, &RainTextureArray, &RainTextureArraySRV ) );
+            LE( LoadTextureArray( e->GetDevice().Get(), e->GetContext().Get(), const_cast<char*>("system\\GD3D11\\Textures\\Raindrops\\cv0_vPositive_"), 370, &RainTextureArray, &RainTextureArraySRV ) );
 
         }
 

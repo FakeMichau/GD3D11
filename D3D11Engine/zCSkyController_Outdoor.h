@@ -196,7 +196,8 @@ public:
 
         XMFLOAT3 pos;
         //XMVector3NormalizeEst leads to jumping shadows dueto reduced accuracy in combination with XMStoreFloat3( &LightDir, DirectX::XMVector3NormalizeEst( XMLoadFloat3( &LightDir ) ) ); but setting this mentioned code line in this comment to non Est does not influence if this active code line before the comment is Est or not
-        XMStoreFloat3( &pos, XMVector3TransformNormal( XMVector3Normalize( sunPos ), XMMatrixTranspose( XMLoadFloat4x4( &(HookedFunctions::OriginalFunctions.original_Alg_Rotation3DNRad( rotAxis, -angle )) ) ) ) );
+        auto rot = HookedFunctions::OriginalFunctions.original_Alg_Rotation3DNRad( rotAxis, -angle );
+        XMStoreFloat3( &pos, XMVector3TransformNormal( XMVector3Normalize( sunPos ), XMMatrixTranspose( XMLoadFloat4x4( &rot ) ) ) );
 
         return pos;
     }

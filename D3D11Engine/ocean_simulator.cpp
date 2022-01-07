@@ -218,7 +218,7 @@ OceanSimulator::OceanSimulator(OceanParameter& params, Microsoft::WRL::ComPtr<ID
 	// Compute shaders
 	Microsoft::WRL::ComPtr<ID3DBlob> pBlobUpdateSpectrumCS;
 
-    CompileShaderFromFile(L"ocean_simulator_cs.hlsl", "UpdateSpectrumCS", "cs_5_0", pBlobUpdateSpectrumCS.GetAddressOf());
+    CompileShaderFromFile(const_cast<WCHAR*>(L"ocean_simulator_cs.hlsl"), "UpdateSpectrumCS", "cs_5_0", pBlobUpdateSpectrumCS.GetAddressOf());
 	assert(pBlobUpdateSpectrumCS.Get());
 
     m_pd3dDevice->CreateComputeShader(pBlobUpdateSpectrumCS->GetBufferPointer(), pBlobUpdateSpectrumCS->GetBufferSize(), nullptr, m_pUpdateSpectrumCS.GetAddressOf());
@@ -229,9 +229,9 @@ OceanSimulator::OceanSimulator(OceanParameter& params, Microsoft::WRL::ComPtr<ID
 	Microsoft::WRL::ComPtr<ID3DBlob> pBlobUpdateDisplacementPS;
 	Microsoft::WRL::ComPtr<ID3DBlob> pBlobGenGradientFoldingPS;
 
-    CompileShaderFromFile(L"ocean_simulator_vs_ps.hlsl", "QuadVS", "vs_5_0", pBlobQuadVS.GetAddressOf());
-    CompileShaderFromFile(L"ocean_simulator_vs_ps.hlsl", "UpdateDisplacementPS", "ps_5_0", pBlobUpdateDisplacementPS.GetAddressOf());
-    CompileShaderFromFile(L"ocean_simulator_vs_ps.hlsl", "GenGradientFoldingPS", "ps_5_0", pBlobGenGradientFoldingPS.GetAddressOf());
+    CompileShaderFromFile( const_cast<WCHAR*>(L"ocean_simulator_vs_ps.hlsl"), "QuadVS", "vs_5_0", pBlobQuadVS.GetAddressOf());
+    CompileShaderFromFile( const_cast<WCHAR*>(L"ocean_simulator_vs_ps.hlsl"), "UpdateDisplacementPS", "ps_5_0", pBlobUpdateDisplacementPS.GetAddressOf());
+    CompileShaderFromFile( const_cast<WCHAR*>(L"ocean_simulator_vs_ps.hlsl"), "GenGradientFoldingPS", "ps_5_0", pBlobGenGradientFoldingPS.GetAddressOf());
 	assert(pBlobQuadVS.Get());
 	assert(pBlobUpdateDisplacementPS.Get());
 	assert(pBlobGenGradientFoldingPS.Get());

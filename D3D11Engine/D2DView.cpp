@@ -124,7 +124,7 @@ XRESULT D2DView::Init( const INT2& initialResolution, ID3D11Texture2D* rendertar
         D2D1::PixelFormat( DXGI_FORMAT_UNKNOWN, D2D1_ALPHA_MODE_PREMULTIPLIED ) );
     if ( !dxgiBackbuffer || FAILED( Factory->CreateDxgiSurfaceRenderTarget( dxgiBackbuffer.Get(), props, &RenderTarget ) ) ) {
         // Copy downloadlink of the platform update to clipboard
-        clipput( "https://www.microsoft.com/en-us/download/details.aspx?id=36805" );
+        clipput( const_cast<char*>("https://www.microsoft.com/en-us/download/details.aspx?id=36805") );
 
         LogWarnBox() << "Failed to share D3D11-Surface with D2D. If you are running on Windows 7, you may just need to install"
             "the latest platform-update, which enables you to use DXGI 1.2.\n"

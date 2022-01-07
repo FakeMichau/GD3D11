@@ -113,9 +113,10 @@ void D3D11PFX_SMAA::RenderPostFX(const Microsoft::WRL::ComPtr<ID3D11ShaderResour
 	if ( !EdgesTex ) {
 		OnResize( INT2( engine->GetResolution().x, engine->GetResolution().y ) );
 	}
-
-	engine->GetContext()->ClearRenderTargetView( EdgesTex->GetRenderTargetView().Get(), (float*)&float4( 0, 0, 0, 0 ) );
-	engine->GetContext()->ClearRenderTargetView( BlendTex->GetRenderTargetView().Get(), (float*)&float4( 0, 0, 0, 0 ) );
+    auto float41 = float4( 0, 0, 0, 0 );
+    auto float42 = float4( 0, 0, 0, 0 );
+	engine->GetContext()->ClearRenderTargetView( EdgesTex->GetRenderTargetView().Get(), reinterpret_cast<float*>(&float41) );
+	engine->GetContext()->ClearRenderTargetView( BlendTex->GetRenderTargetView().Get(), reinterpret_cast<float*>(&float42) );
 
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> OldRTV;
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> OldDSV;

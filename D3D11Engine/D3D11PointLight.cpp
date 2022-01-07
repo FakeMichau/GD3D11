@@ -240,8 +240,10 @@ void D3D11PointLight::RenderCubemapFace( const DirectX::XMFLOAT4X4& view, const 
     // Replace gothics camera
     Engine::GAPI->SetCameraReplacementPtr( &cr );
 
-    if ( engine->GetDummyCubeRT() )
-        engine->GetContext()->ClearRenderTargetView( engine->GetDummyCubeRT()->GetRTVCubemapFace( faceIdx ).Get(), (float*)&float4( 0, 0, 0, 0 ) );
+    if ( engine->GetDummyCubeRT() ) {
+        auto float41 = float4( 0, 0, 0, 0 );
+        engine->GetContext()->ClearRenderTargetView( engine->GetDummyCubeRT()->GetRTVCubemapFace( faceIdx ).Get(), reinterpret_cast<float*>(&float41) );
+    }
 
     // Disable shadows for NPCs
     // TODO: Only for the player himself, because his shadows look ugly when using a torch

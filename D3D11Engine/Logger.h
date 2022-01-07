@@ -148,7 +148,7 @@ public:
     /** STL stringstream feature */
     template< typename T >
     inline Log& operator << ( const T& obj ) {
-        Message << obj;
+        //Message << obj;
         return *this;
     }
 

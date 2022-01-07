@@ -218,8 +218,8 @@ XRESULT D3D11Texture::CreateThumbnail() {
     LE( engine->GetDevice()->CreateRenderTargetView( Thumbnail.Get(), nullptr, tempRTV.GetAddressOf() ) );
     if ( !tempRTV.Get() )
         return XR_FAILED;
-
-    engine->GetContext()->ClearRenderTargetView( tempRTV.Get(), (float*)&float4( 1, 0, 0, 1 ) );
+    auto float41 = float4( 1, 0, 0, 1 );
+    engine->GetContext()->ClearRenderTargetView( tempRTV.Get(), reinterpret_cast<float*>(&float41) );
 
     // Copy main texture to it
     engine->GetContext()->PSSetShaderResources( 0, 1, ShaderResourceView.GetAddressOf() );

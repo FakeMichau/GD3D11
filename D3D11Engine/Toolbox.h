@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include <unordered_map>
+#include <algorithm>
 
 #include <Windows.h>
 
@@ -94,6 +95,7 @@ namespace Toolbox {
     /** Sorts the vector and removes all doubles */
     template<typename T>
     void RemoveDoubles( std::vector<T>& vector ) {
+        
         std::sort( vector.begin(), vector.end() );
         std::unique( vector.begin(), vector.end() );
     }

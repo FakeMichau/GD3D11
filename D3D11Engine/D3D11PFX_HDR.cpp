@@ -21,9 +21,12 @@ D3D11PFX_HDR::D3D11PFX_HDR( D3D11PfxRenderer* rnd ) : D3D11PFX_Effect( rnd ) {
 	LumBuffer2 = new RenderToTextureBuffer( engine->GetDevice().Get(), LUM_SIZE, LUM_SIZE, DXGI_FORMAT_R16_FLOAT, nullptr, DXGI_FORMAT_UNKNOWN, DXGI_FORMAT_UNKNOWN, (int)(log( LUM_SIZE ) / log( 2 )) );
 	LumBuffer3 = new RenderToTextureBuffer( engine->GetDevice().Get(), LUM_SIZE, LUM_SIZE, DXGI_FORMAT_R16_FLOAT, nullptr, DXGI_FORMAT_UNKNOWN, DXGI_FORMAT_UNKNOWN, (int)(log( LUM_SIZE ) / log( 2 )) );
 
-	engine->GetContext()->ClearRenderTargetView( LumBuffer1->GetRenderTargetView().Get(), (float*)&float4( 0, 0, 0, 0 ) );
-	engine->GetContext()->ClearRenderTargetView( LumBuffer2->GetRenderTargetView().Get(), (float*)&float4( 0, 0, 0, 0 ) );
-	engine->GetContext()->ClearRenderTargetView( LumBuffer3->GetRenderTargetView().Get(), (float*)&float4( 0, 0, 0, 0 ) );
+    auto float41 = float4( 0, 0, 0, 0 );
+    auto float42 = float4( 0, 0, 0, 0 );
+    auto float43 = float4( 0, 0, 0, 0 );
+	engine->GetContext()->ClearRenderTargetView( LumBuffer1->GetRenderTargetView().Get(), reinterpret_cast<float*>(&float41) );
+	engine->GetContext()->ClearRenderTargetView( LumBuffer2->GetRenderTargetView().Get(), reinterpret_cast<float*>(&float42) );
+	engine->GetContext()->ClearRenderTargetView( LumBuffer3->GetRenderTargetView().Get(), reinterpret_cast<float*>(&float43) );
 	ActiveLumBuffer = 0;
 }
 

@@ -431,8 +431,7 @@ XRESULT D2DSettingsDialog::InitControls() {
 	dynShadowSlider->SetIsIntegralSlider( true );
 	dynShadowSlider->SetMinMax( 0.0f, GothicRendererSettings::_PLS_NUM_SETTINGS - 1 );
 
-	static char* dsValues [] = { "Disabled", "Static", "Update dynamic", "Full" };
-	std::vector<std::string> dsStrings = std::vector<std::string>( dsValues, dsValues + sizeof( dsValues ) / sizeof( dsValues[0] ) );
+	std::vector<std::string> dsStrings = std::vector<std::string>{ "Disabled", "Static", "Update dynamic", "Full" };
 	dynShadowSlider->SetDisplayValues( dsStrings );
 
 	dynShadowSlider->SetValue( (float)Engine::GAPI->GetRendererState().RendererSettings.EnablePointlightShadows );
