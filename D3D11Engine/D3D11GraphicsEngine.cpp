@@ -908,10 +908,10 @@ XRESULT D3D11GraphicsEngine::OnBeginFrame() {
         }
         makros.push_back( m );
 
-        ShaderInfo si = ShaderInfo( "PS_PFX_HDR", "PS_PFX_HDR.hlsl", "p", makros );
+        ShaderInfo si = ShaderInfo( "PS_PFX_HDR", "PS_PFX_HDR.hlsl", "p", std::vector( makros ) );
         si.cBufferSizes.push_back( sizeof( HDRSettingsConstantBuffer ) );
         ShaderManager->UpdateShaderInfo( si );
-        si = ShaderInfo( "PS_PFX_Tonemap", "PS_PFX_Tonemap.hlsl", "p", makros );
+        si = ShaderInfo( "PS_PFX_Tonemap", "PS_PFX_Tonemap.hlsl", "p", std::vector( makros ) );
         si.cBufferSizes.push_back( sizeof( HDRSettingsConstantBuffer ) );
         ShaderManager->UpdateShaderInfo( si );
     }

@@ -225,7 +225,7 @@ XRESULT D3D11ShaderManager::Init() {
     m.Definition = "4";
     makros.push_back( m );
 
-    Shaders.push_back( ShaderInfo( "PS_PFX_HDR", "PS_PFX_HDR.hlsl", "p", makros ) );
+    Shaders.push_back( ShaderInfo( "PS_PFX_HDR", "PS_PFX_HDR.hlsl", "p", std::vector(makros) ) );
     Shaders.back().cBufferSizes.push_back( sizeof( HDRSettingsConstantBuffer ) );
     makros.clear();
 
@@ -237,7 +237,7 @@ XRESULT D3D11ShaderManager::Init() {
     m.Definition = "4";
     makros.push_back( m );
 
-    Shaders.push_back( ShaderInfo( "PS_PFX_Tonemap", "PS_PFX_Tonemap.hlsl", "p", makros ) );
+    Shaders.push_back( ShaderInfo( "PS_PFX_Tonemap", "PS_PFX_Tonemap.hlsl", "p", std::vector(makros) ) );
     Shaders.back().cBufferSizes.push_back( sizeof( HDRSettingsConstantBuffer ) );
     makros.clear();
 
@@ -298,7 +298,7 @@ XRESULT D3D11ShaderManager::Init() {
     m.Definition = "0";
     makros.push_back( m );
 
-    Shaders.push_back( ShaderInfo( "PS_Diffuse", "PS_Diffuse.hlsl", "p", makros ) );
+    Shaders.push_back( ShaderInfo( "PS_Diffuse", "PS_Diffuse.hlsl", "p", std::vector( makros ) ) );
     Shaders.back().cBufferSizes.push_back( sizeof( GothicGraphicsState ) );
     Shaders.back().cBufferSizes.push_back( sizeof( AtmosphereConstantBuffer ) );
     Shaders.back().cBufferSizes.push_back( sizeof( MaterialInfo::Buffer ) );
@@ -314,7 +314,7 @@ XRESULT D3D11ShaderManager::Init() {
     m.Definition = "1";
     makros.push_back( m );
 
-    Shaders.push_back( ShaderInfo( "PS_DS_AtmosphericScattering_Rain", "PS_DS_AtmosphericScattering.hlsl", "p", makros ) );
+    Shaders.push_back( ShaderInfo( "PS_DS_AtmosphericScattering_Rain", "PS_DS_AtmosphericScattering.hlsl", "p", std::vector( makros ) ) );
     Shaders.back().cBufferSizes.push_back( sizeof( DS_ScreenQuadConstantBuffer ) );
     Shaders.back().cBufferSizes.push_back( sizeof( AtmosphereConstantBuffer ) );
 
@@ -335,7 +335,7 @@ XRESULT D3D11ShaderManager::Init() {
     m.Definition = "0";
     makros.push_back( m );
 
-    Shaders.push_back( ShaderInfo( "PS_DiffuseNormalmapped", "PS_Diffuse.hlsl", "p", makros ) );
+    Shaders.push_back( ShaderInfo( "PS_DiffuseNormalmapped", "PS_Diffuse.hlsl", "p", std::vector( makros ) ) );
     Shaders.back().cBufferSizes.push_back( sizeof( GothicGraphicsState ) );
     Shaders.back().cBufferSizes.push_back( sizeof( AtmosphereConstantBuffer ) );
     Shaders.back().cBufferSizes.push_back( sizeof( MaterialInfo::Buffer ) );
@@ -354,7 +354,7 @@ XRESULT D3D11ShaderManager::Init() {
     m.Definition = "1";
     makros.push_back( m );
 
-    Shaders.push_back( ShaderInfo( "PS_DiffuseNormalmappedFxMap", "PS_Diffuse.hlsl", "p", makros ) );
+    Shaders.push_back( ShaderInfo( "PS_DiffuseNormalmappedFxMap", "PS_Diffuse.hlsl", "p", std::vector( makros ) ) );
     Shaders.back().cBufferSizes.push_back( sizeof( GothicGraphicsState ) );
     Shaders.back().cBufferSizes.push_back( sizeof( AtmosphereConstantBuffer ) );
     Shaders.back().cBufferSizes.push_back( sizeof( MaterialInfo::Buffer ) );
@@ -369,7 +369,7 @@ XRESULT D3D11ShaderManager::Init() {
     m.Definition = "1";
     makros.push_back( m );
 
-    Shaders.push_back( ShaderInfo( "PS_DiffuseAlphaTest", "PS_Diffuse.hlsl", "p", makros ) );
+    Shaders.push_back( ShaderInfo( "PS_DiffuseAlphaTest", "PS_Diffuse.hlsl", "p", std::vector( makros ) ) );
     Shaders.back().cBufferSizes.push_back( sizeof( GothicGraphicsState ) );
     Shaders.back().cBufferSizes.push_back( sizeof( AtmosphereConstantBuffer ) );
     Shaders.back().cBufferSizes.push_back( sizeof( MaterialInfo::Buffer ) );
@@ -384,7 +384,7 @@ XRESULT D3D11ShaderManager::Init() {
     m.Definition = "1";
     makros.push_back( m );
 
-    Shaders.push_back( ShaderInfo( "PS_DiffuseNormalmappedAlphaTest", "PS_Diffuse.hlsl", "p", makros ) );
+    Shaders.push_back( ShaderInfo( "PS_DiffuseNormalmappedAlphaTest", "PS_Diffuse.hlsl", "p", std::vector( makros ) ) );
     Shaders.back().cBufferSizes.push_back( sizeof( GothicGraphicsState ) );
     Shaders.back().cBufferSizes.push_back( sizeof( AtmosphereConstantBuffer ) );
     Shaders.back().cBufferSizes.push_back( sizeof( MaterialInfo::Buffer ) );
@@ -403,7 +403,7 @@ XRESULT D3D11ShaderManager::Init() {
     m.Definition = "1";
     makros.push_back( m );
 
-    Shaders.push_back( ShaderInfo( "PS_DiffuseNormalmappedAlphaTestFxMap", "PS_Diffuse.hlsl", "p", makros ) );
+    Shaders.push_back( ShaderInfo( "PS_DiffuseNormalmappedAlphaTestFxMap", "PS_Diffuse.hlsl", "p", std::vector( makros ) ) );
     Shaders.back().cBufferSizes.push_back( sizeof( GothicGraphicsState ) );
     Shaders.back().cBufferSizes.push_back( sizeof( AtmosphereConstantBuffer ) );
     Shaders.back().cBufferSizes.push_back( sizeof( MaterialInfo::Buffer ) );
@@ -416,19 +416,19 @@ XRESULT D3D11ShaderManager::Init() {
     m.Name = "RENDERMODE";
     m.Definition = "0";
     makros.push_back( m );
-    Shaders.push_back( ShaderInfo( "PS_Preview_White", "PS_Preview.hlsl", "p", makros ) );
+    Shaders.push_back( ShaderInfo( "PS_Preview_White", "PS_Preview.hlsl", "p", std::vector( makros ) ) );
 
     makros.clear();
     m.Name = "RENDERMODE";
     m.Definition = "1";
     makros.push_back( m );
-    Shaders.push_back( ShaderInfo( "PS_Preview_Textured", "PS_Preview.hlsl", "p", makros ) );
+    Shaders.push_back( ShaderInfo( "PS_Preview_Textured", "PS_Preview.hlsl", "p", std::vector( makros ) ) );
 
     makros.clear();
     m.Name = "RENDERMODE";
     m.Definition = "2";
     makros.push_back( m );
-    Shaders.push_back( ShaderInfo( "PS_Preview_TexturedLit", "PS_Preview.hlsl", "p", makros ) );
+    Shaders.push_back( ShaderInfo( "PS_Preview_TexturedLit", "PS_Preview.hlsl", "p", std::vector( makros ) ) );
 
     makros.clear();
 
@@ -449,7 +449,7 @@ XRESULT D3D11ShaderManager::Init() {
     m.Definition = "1";
     makros.push_back( m );
 
-    Shaders.push_back( ShaderInfo( "PS_LPPNormalmappedAlphaTest", "PS_LPP.hlsl", "p", makros ) );
+    Shaders.push_back( ShaderInfo( "PS_LPPNormalmappedAlphaTest", "PS_LPP.hlsl", "p", std::vector( makros ) ) );
     Shaders.back().cBufferSizes.push_back( sizeof( GothicGraphicsState ) );
     Shaders.back().cBufferSizes.push_back( sizeof( AtmosphereConstantBuffer ) );
     Shaders.back().cBufferSizes.push_back( sizeof( MaterialInfo::Buffer ) );
