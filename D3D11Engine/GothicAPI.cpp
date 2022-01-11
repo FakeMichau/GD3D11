@@ -1406,7 +1406,7 @@ void GothicAPI::OnRemovedVob( zCVob* vob, zCWorld* world ) {
 
     // Erase the vob from visual-vob map
     std::list<BaseVobInfo*>& list = VobsByVisual[vob->GetVisual()];
-    for ( auto vit = list.begin(); vit != list.end(); ++vit ) {
+    for ( auto&& vit = list.begin(); vit != list.end(); ++vit ) {
         if ( (*vit)->Vob == vob ) {
             list.erase( vit );
             break; // Can (should!) only be in here once
@@ -1527,7 +1527,7 @@ void GothicAPI::OnRemovedVob( zCVob* vob, zCWorld* world ) {
         vi->VobSection->Vobs.remove( vi );
     }
     // Erase it from the skeletal vob-list
-    for ( auto vit = SkeletalMeshVobs.begin(); vit != SkeletalMeshVobs.end(); ++vit ) {
+    for ( auto&& vit = SkeletalMeshVobs.begin(); vit != SkeletalMeshVobs.end(); ++vit ) {
         if ( (*vit)->Vob == vob ) {
             //SkeletalVobInfo* vi = *vit;
             SkeletalMeshVobs.erase( vit );
@@ -1544,7 +1544,7 @@ void GothicAPI::OnRemovedVob( zCVob* vob, zCWorld* world ) {
     }
 
     // Erase it from dynamically loaded vobs
-    for ( auto vit = DynamicallyAddedVobs.begin(); vit != DynamicallyAddedVobs.end(); ++vit ) {
+    for ( auto&& vit = DynamicallyAddedVobs.begin(); vit != DynamicallyAddedVobs.end(); ++vit ) {
         if ( (*vit)->Vob == vob ) {
             DynamicallyAddedVobs.erase( vit );
             break;
